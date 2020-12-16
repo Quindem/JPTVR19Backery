@@ -32,7 +32,16 @@ import session.ItemFacade;
     "/listCustomer",
     "/index",
     "/addItem",
-    "/createItem"
+    "/createItem",
+    "/editItemForm",
+    "/choiceItem",
+    "/editItem",
+    "/listItem",
+    "/addMoneyForm",
+    "/customerChoice",
+    "/addMoney",
+    "/buyItemForm",
+    "/buyItem"
 })
 public class MyServlet extends HttpServlet {
     @EJB
@@ -41,6 +50,7 @@ public class MyServlet extends HttpServlet {
     private ItemFacade itemFacade;
     
     private List<Customer> listCustomer;
+    private List<Item> listItem;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -68,7 +78,7 @@ public class MyServlet extends HttpServlet {
                 String surname = request.getParameter("surname");
                 String phone = request.getParameter("phone");
                 String email = request.getParameter("email");
-                Customer customer = new Customer(name, surname, phone, email);
+                Customer customer = new Customer(name, surname, phone, email, 0);
                 customerFacade.create(customer);
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                 break;
@@ -107,6 +117,82 @@ public class MyServlet extends HttpServlet {
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
                 Item item = new Item(name, price, quantity);
                 itemFacade.create(item);
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                break;
+            case "/editItemForm":
+                listItem = itemFacade.findAll();
+                request.setAttribute("listItem", listItem);
+                request.getRequestDispatcher("/WEB-INF/editItemForm.jsp").forward(request, response);
+                break;
+            case "/choiceItem":
+                String value = request.getParameter("itemId");;
+                item = itemFacade.find(Long.parseLong(value));               
+                request.setAttribute("listItem", listItem);    
+                request.setAttribute("item", item);
+                request.getRequestDispatcher("/WEB-INF/editItemForm.jsp").forward(request, response);
+                break;
+            case "/editItem":
+                id = request.getParameter("itemID");
+                name = request.getParameter("name");
+                price = Double.parseDouble(request.getParameter("price"));
+                quantity = Integer.parseInt(request.getParameter("quantity"));
+                
+                item = itemFacade.find(Long.parseLong(id)); 
+                item.setName(name);
+                item.setPrice(price);
+                item.setQuantity(quantity);
+                itemFacade.edit(item);
+
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                break;
+            case "/listItem":
+                listItem = itemFacade.findAll();
+                request.setAttribute("listItem", listItem);
+                request.getRequestDispatcher("/WEB-INF/listItem.jsp").forward(request, response);
+                break;
+            case "/addMoneyForm":
+                listCustomer = customerFacade.findAll();
+                request.setAttribute("listCustomer", listCustomer);
+                request.getRequestDispatcher("/WEB-INF/addMoneyForm.jsp").forward(request, response);
+                break;
+            case "/customerChoice":
+                value = request.getParameter("customerID");
+                customer = customerFacade.find(Long.parseLong(value));
+                request.setAttribute("listCustomer", listCustomer);
+                request.setAttribute("customer", customer);
+                request.getRequestDispatcher("/WEB-INF/addMoneyForm.jsp").forward(request, response);
+            case "/addMoney":
+                id = request.getParameter("customerID");
+                Double money = Double.parseDouble(request.getParameter("money"));
+                customer = customerFacade.find(Long.parseLong(id));
+                
+                customer.setMoney(customer.getMoney() + money);
+                customerFacade.edit(customer);
+                
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+            case "/buyItemForm":
+                listCustomer = customerFacade.findAll();
+                listItem = itemFacade.findAll();
+                request.setAttribute("listCustomer", listCustomer);
+                request.setAttribute("listItem", listItem);
+                request.getRequestDispatcher("/WEB-INF/buyItemForm.jsp").forward(request, response);
+                break;
+            case "/buyItem":
+                String customerID = request.getParameter("customerID");
+                String itemID = request.getParameter("itemID");
+                customer = customerFacade.find(Long.parseLong(customerID));
+                item = itemFacade.find(Long.parseLong(itemID));
+                if (customer.getMoney() - item.getPrice() > 0){
+                    item.setQuantity(item.getQuantity() - 1);
+                    customer.setMoney(customer.getMoney() - item.getPrice());
+                    customerFacade.edit(customer);
+                    itemFacade.edit(item);
+                    request.setAttribute("info", "Куплент товар: " + item.toString());
+                    request.getRequestDispatcher("/index.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("info", "Недостаточно денег");
+                    request.getRequestDispatcher("/index.jsp").forward(request, response);
+                }
                 break;
         }
     }

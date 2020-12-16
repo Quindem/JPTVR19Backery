@@ -21,15 +21,17 @@ public class Customer implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name, surname, phone, email;
+    private double money;
 
     public Customer() {
     }
 
-    public Customer(String name, String surname, String phone, String email) {
+    public Customer(String name, String surname, String phone, String email, double money) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.email = email;
+        this.money = money;
     }
 
     public String getName() {
@@ -71,12 +73,20 @@ public class Customer implements Serializable{
     public void setId(Long id) {
         this.id = id;
     }
-    
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
 
     @Override
     public String toString() {
-        return "Customer{" + "name=" + name + ", surname=" + surname + ", phone=" + phone + ", email=" + email + '}';
+        return "Customer{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", phone=" + phone + ", email=" + email + ", money=" + money + '}';
     }
+    
     
    
 }

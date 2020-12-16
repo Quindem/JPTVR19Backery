@@ -24,7 +24,7 @@
             </div>
             <div class="row">
                 <div class="block"><span>Количество предмтов</span></div>
-                <div class="block"><input type="text" name="quantity" placeholder="Введите колличество"></div>
+                <div class="block"><input type="text" name="quantity" placeholder="Введите количество"></div>
             </div>
             <input type="submit" name="submit" value="Добавить">
         </form>

@@ -20,8 +20,11 @@
     <a href="listCustomer">Список покупателей</a><br>
     <br>
     <a href="addItem">Добавить предмет</a><br>
-    <a href="editCustomerForm">Изменить данные предмета</a><br>
-    <a href="listCustomer">Список предметов</a><br>
+    <a href="editItemForm">Изменить данные предмета</a><br>
+    <a href="listItem">Список предметов</a><br>
+    <br>
+    <a href="addMoneyForm">Пополнить кошелёк</a><br>
+    <a href="buyItemForm">Купить товар</a><br>
    
   </body>
 </html>
