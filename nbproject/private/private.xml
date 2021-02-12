@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JPTVR19/JPTVR19ClothesShop/src/conf/persistence.xml</file>
-            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JPTVR19/JPTVR19ClothesShop/src/java/entity/ItemType.java</file>
-            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JPTVR19/JPTVR19ClothesShop/src/java/session/ItemTypeFacade.java</file>
-            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JPTVR19/JPTVR19ClothesShop/src/java/session/ItemFacade.java</file>
-            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JPTVR19/JPTVR19ClothesShop/src/java/servlets/MyServlet.java</file>
-            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JPTVR19/JPTVR19ClothesShop/src/java/entity/Item.java</file>
-            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JPTVR19/JPTVR19ClothesShop/src/java/session/CustomerFacade.java</file>
+            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JPTVR19/JPTVR19ClothesShop/web/index.jsp</file>
+            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JPTVR19/JPTVR19ClothesShop/src/java/property/pathToFile.properties</file>
+            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JPTVR19/JPTVR19ClothesShop/web/WEB-INF/admin/editUserForm.jsp</file>
+            <file>file:/C:/Users/pupil/Documents/NetBeansProjects/JPTVR19/JPTVR19ClothesShop/src/java/servlets/AdminServlet.java</file>
         </group>
     </open-files>
 </project-private>

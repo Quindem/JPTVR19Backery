@@ -16,22 +16,27 @@ import javax.persistence.Id;
  * @author Alebro
  */
 @Entity
-public class Customer implements Serializable{ 
+public class User implements Serializable{ 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name, surname, phone, email;
     private double money;
+    private String login, password;
+    private long roleID;
 
-    public Customer() {
+    public User() {
     }
 
-    public Customer(String name, String surname, String phone, String email, double money) {
+    public User(String login, String password, String name, String surname, String phone, String email, double money, long roleID) {
+        this.login = login;
+        this.password = password;
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.email = email;
         this.money = money;
+        this.roleID = roleID;
     }
 
     public String getName() {
@@ -82,11 +87,35 @@ public class Customer implements Serializable{
         this.money = money;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public long getRoleID() {
+        return roleID;
+    }
+
+    public void setRoleID(long roleID) {
+        this.roleID = roleID;
+    }
+
     @Override
     public String toString() {
-        return "Customer{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", phone=" + phone + ", email=" + email + ", money=" + money + '}';
+        return "User{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", phone=" + phone + ", email=" + email + ", money=" + money + ", login=" + login + ", password=" + password + ", roleID=" + roleID + '}';
     }
-    
+
     
    
 }

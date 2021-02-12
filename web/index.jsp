@@ -15,14 +15,17 @@
     <h1>Библиотека JPTVR19</h1>
     <p>${info}</p>
     <br>
-    <a href="addCustomer">Добавить покупателя</a><br>
-    <a href="editCustomerForm">Изменить данные покупателя</a><br>
-    <a href="listCustomer">Список покупателей</a><br>
+    <a href="register">Регистрация</a><br>
+    <a href="loginForm">Вход</a><br>
+    <br>
+    <a href="addItemTypeForm">Добавить тип предмета</a><br>
+    <a href="listUser">Список пользователей</a><br>
+    <a href="editUserForm">Изменить данные пользователя</a><br>
     <br>
     <a href="addItem">Добавить предмет</a><br>
     <a href="editItemForm">Изменить данные предмета</a><br>
-    <a href="listItem">Список предметов</a><br>
     <br>
+    <a href="listItem">Список предметов</a><br>
     <a href="addMoneyForm">Пополнить кошелёк</a><br>
     <a href="buyItemForm">Купить товар</a><br>
    

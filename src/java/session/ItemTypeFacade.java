@@ -5,8 +5,8 @@
  */
 package session;
 
-import entity.Item;
 import entity.ItemType;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -14,7 +14,10 @@ import javax.persistence.PersistenceContext;
  *
  * @author pupil
  */
+
+@Stateless
 public class ItemTypeFacade extends AbstractFacade<ItemType>{
+    
     @PersistenceContext(unitName = "JPTVR19ClothesShopPU")
     private EntityManager em;
 

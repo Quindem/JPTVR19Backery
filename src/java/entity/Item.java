@@ -23,13 +23,15 @@ public class Item {
     private String name;
     private double price;
     private int quantity;
+    private long itemTypeID;
 
     public Item() {
     }
 
-    public Item(String name, double price, int quantity) {
+    public Item(String name, double price, long itemTypeID, int quantity) {
         this.name = name;
         this.price = price;
+        this.itemTypeID = itemTypeID;
         this.quantity = quantity;
     }
 
@@ -65,10 +67,20 @@ public class Item {
         this.quantity = quantity;
     }
 
+    public long getItemType() {
+        return itemTypeID;
+    }
+
+    public void setItemType(long itemTypeID) {
+        this.itemTypeID = itemTypeID;
+    }
+    
+    
     @Override
     public String toString() {
         return "Item{" + "id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity + '}';
     }
+
     
     
     

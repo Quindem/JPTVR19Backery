@@ -21,12 +21,12 @@
                     <td>Телефон</td>
                     <td>Почта</td>
                 </tr>
-            <c:forEach var="customer" items="${listCustomers}">
+            <c:forEach var="user" items="${listUser}">
                 <tr>
-                    <td>${customer.name}</td>
-                    <td>${customer.surname}</td>
-                    <td>${customer.phone}</td>
-                    <td>${customer.email}</td>
+                    <td>${user.name}</td>
+                    <td>${user.surname}</td>
+                    <td>${user.phone}</td>
+                    <td>${user.email}</td>
                 </tr>
             </c:forEach>
         </table>

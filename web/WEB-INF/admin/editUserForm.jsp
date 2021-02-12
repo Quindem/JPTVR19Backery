@@ -13,10 +13,10 @@
     </head>
     <body>
         <h1>Список покупателей</h1>
-        <form action="editCustomer" method="POST">
+        <form action="editUser" method="POST">
             <select id="customerChoice" name="customer">
                 <option value="">Выберите покупателя</option>
-                <c:forEach var="customer" items="${listCustomer}">
+                <c:forEach var="customer" items="${listUser}">
                     <option value="${customer.id}" id="${customer.id}">${customer.name} ${customer.surname} ${customer.phone} ${customer.email}</option>
                 </c:forEach>
             </select>

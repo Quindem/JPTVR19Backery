@@ -15,17 +15,17 @@ import javax.persistence.Id;
  * @author pupil
  */
 @Entity
-public class ItemType {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private String name;
     
-    public ItemType() {
+    public Role() {
     }
 
-    public ItemType( String name) {
+    public Role( String name) {
         this.name = name;
     }
 
@@ -47,7 +47,7 @@ public class ItemType {
 
     @Override
     public String toString() {
-        return "ItemType{" + "id=" + id + ", type=" + name + '}';
+        return "Role{" + "id=" + id + ", type=" + name + '}';
     }
     
     

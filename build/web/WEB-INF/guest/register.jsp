@@ -9,7 +9,15 @@
     <body>
         <h1>Добавление покупателя!</h1>
         
-        <form action="createCustomer" method="POST">
+        <form action="createUser" method="POST">
+            <div class="row">
+                <div class="block"><span>Логин</span></div>
+                <div class="block"><input type="text" name="login" placeholder="Введите имя"></div>
+            </div>
+            <div class="row">
+                <div class="block"><span>Пароль</span></div>
+                <div class="block"><input type="password" name="password" placeholder="Введите фамилию"></div>
+            </div>
             <div class="row">
                 <div class="block"><span>Имя пользователя</span></div>
                 <div class="block"><input type="text" name="name" placeholder="Введите имя"></div>

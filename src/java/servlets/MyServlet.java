@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,8 +6,9 @@
  */
 package servlets;
 
-import entity.Customer;
+import entity.User;
 import entity.Item;
+import entity.ItemType;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +18,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import session.CustomerFacade;
+import session.UserFacade;
 import session.ItemFacade;
+import session.ItemTypeFacade;
 
 
 /**
@@ -25,31 +28,18 @@ import session.ItemFacade;
  * @author Melnikov
  */
 @WebServlet(name = "MyServlet", urlPatterns = {
-    "/addCustomer",
-    "/createCustomer",
-    "/editCustomerForm",
-    "/editCustomer",
-    "/listCustomer",
-    "/index",
-    "/addItem",
-    "/createItem",
-    "/editItemForm",
-    "/choiceItem",
-    "/editItem",
-    "/listItem",
-    "/addMoneyForm",
-    "/customerChoice",
-    "/addMoney",
-    "/buyItemForm",
-    "/buyItem"
+    "/index"
 })
 public class MyServlet extends HttpServlet {
     @EJB
-    private CustomerFacade customerFacade;
+    private UserFacade userFacade;
     @EJB
     private ItemFacade itemFacade;
+    @EJB
+    private ItemTypeFacade itemTypeFacade;
+
     
-    private List<Customer> listCustomer;
+    private List<User> listCustomer;
     private List<Item> listItem;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -70,52 +60,38 @@ public class MyServlet extends HttpServlet {
             case "/index":
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                 break;
-            case "/addCustomer":
-                request.getRequestDispatcher("/WEB-INF/addCustomerForm.jsp").forward(request, response);
-                break;
-            case "/createCustomer":
-                String name = request.getParameter("name");
-                String surname = request.getParameter("surname");
-                String phone = request.getParameter("phone");
-                String email = request.getParameter("email");
-                Customer customer = new Customer(name, surname, phone, email, 0);
-                customerFacade.create(customer);
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
-                break;
-            case "/editCustomerForm":
-                listCustomer = customerFacade.findAll();
-                request.setAttribute("listCustomer", listCustomer);
-                request.getRequestDispatcher("/WEB-INF/editCustomerForm.jsp").forward(request, response);
-                break;
-            case "/editCustomer":
-                String id = request.getParameter("customer");
-                name = request.getParameter("name");
-                surname = request.getParameter("surname");
-                phone = request.getParameter("phone");
-                email = request.getParameter("email");
-                
-                customer = customerFacade.find(Long.parseLong(id));
-                customer.setName(name);
-                customer.setSurname(surname);
-                customer.setPhone(phone);
-                customer.setEmail(email);
-                customerFacade.edit(customer);
-
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
-                break;
+            
+            
             case "/listCustomer":
-                List<Customer> listCustomers = customerFacade.findAll();
+                List<User> listCustomers = userFacade.findAll();
                 request.setAttribute("listCustomers", listCustomers);
                 request.getRequestDispatcher("/WEB-INF/listCustomer.jsp").forward(request, response);
                 break;
+            
+            case "/addItemType":
+                String name = request.getParameter("name");
+                System.out.println("NAME: " +  name);
+                ItemType itemType = new ItemType(name);
+                System.out.println(itemType.toString());
+                itemTypeFacade.create(itemType);
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                break;
             case "/addItem":
+                List<ItemType> listItemTypes = itemTypeFacade.findAll();
+                request.setAttribute("listItemTypes", listItemTypes);
+                System.out.println(listItemTypes);
                 request.getRequestDispatcher("/WEB-INF/addItemForm.jsp").forward(request, response);
                 break;
             case "/createItem":
                 name = request.getParameter("name");
                 double price = Double.parseDouble(request.getParameter("price"));
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
-                Item item = new Item(name, price, quantity);
+                
+                String value = request.getParameter("itemId");;
+                itemType = itemTypeFacade.find(Long.parseLong(value)); 
+                
+                Item item = new Item(name, price, itemType.getId() ,quantity);
+                System.out.println(item.toString());
                 itemFacade.create(item);
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                 break;
@@ -125,14 +101,14 @@ public class MyServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/editItemForm.jsp").forward(request, response);
                 break;
             case "/choiceItem":
-                String value = request.getParameter("itemId");;
+                value = request.getParameter("itemId");
                 item = itemFacade.find(Long.parseLong(value));               
                 request.setAttribute("listItem", listItem);    
                 request.setAttribute("item", item);
                 request.getRequestDispatcher("/WEB-INF/editItemForm.jsp").forward(request, response);
                 break;
             case "/editItem":
-                id = request.getParameter("itemID");
+                String id = request.getParameter("itemID");
                 name = request.getParameter("name");
                 price = Double.parseDouble(request.getParameter("price"));
                 quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -151,27 +127,27 @@ public class MyServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/listItem.jsp").forward(request, response);
                 break;
             case "/addMoneyForm":
-                listCustomer = customerFacade.findAll();
+                listCustomer = userFacade.findAll();
                 request.setAttribute("listCustomer", listCustomer);
                 request.getRequestDispatcher("/WEB-INF/addMoneyForm.jsp").forward(request, response);
                 break;
             case "/customerChoice":
                 value = request.getParameter("customerID");
-                customer = customerFacade.find(Long.parseLong(value));
+                User user = userFacade.find(Long.parseLong(value));
                 request.setAttribute("listCustomer", listCustomer);
-                request.setAttribute("customer", customer);
+                request.setAttribute("customer", user);
                 request.getRequestDispatcher("/WEB-INF/addMoneyForm.jsp").forward(request, response);
             case "/addMoney":
-                id = request.getParameter("customerID");
+                 id = request.getParameter("customerID");
                 Double money = Double.parseDouble(request.getParameter("money"));
-                customer = customerFacade.find(Long.parseLong(id));
+                user = userFacade.find(Long.parseLong(id));
                 
-                customer.setMoney(customer.getMoney() + money);
-                customerFacade.edit(customer);
+                user.setMoney(user.getMoney() + money);
+                userFacade.edit(user);
                 
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             case "/buyItemForm":
-                listCustomer = customerFacade.findAll();
+                listCustomer = userFacade.findAll();
                 listItem = itemFacade.findAll();
                 request.setAttribute("listCustomer", listCustomer);
                 request.setAttribute("listItem", listItem);
@@ -180,12 +156,12 @@ public class MyServlet extends HttpServlet {
             case "/buyItem":
                 String customerID = request.getParameter("customerID");
                 String itemID = request.getParameter("itemID");
-                customer = customerFacade.find(Long.parseLong(customerID));
+                user = userFacade.find(Long.parseLong(customerID));
                 item = itemFacade.find(Long.parseLong(itemID));
-                if (customer.getMoney() - item.getPrice() > 0){
+                if (user.getMoney() - item.getPrice() > 0){
                     item.setQuantity(item.getQuantity() - 1);
-                    customer.setMoney(customer.getMoney() - item.getPrice());
-                    customerFacade.edit(customer);
+                    user.setMoney(user.getMoney() - item.getPrice());
+                    userFacade.edit(user);
                     itemFacade.edit(item);
                     request.setAttribute("info", "Куплент товар: " + item.toString());
                     request.getRequestDispatcher("/index.jsp").forward(request, response);
