@@ -6,6 +6,7 @@
 package servlets;
 
 import entity.ItemType;
+import entity.Role;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -80,7 +81,9 @@ public class AdminServlet extends HttpServlet {
             
             case "/listUser":
                 List<User> listUser = userFacade.findAll();
+                List<Role> listRole = roleFacade.findAll();
                 request.setAttribute("listUser", listUser);
+                request.setAttribute("listRole", listRole);
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("listUser")).forward(request, response);
                 break;
                 
@@ -98,23 +101,33 @@ public class AdminServlet extends HttpServlet {
                 break;
                 
             case "/editUserForm":
-                listUser = userFacade.findAll();
-                request.setAttribute("listUser", listUser);
+                String id = request.getParameter("userID");
+                System.out.println(id);
+                user = userFacade.find(Long.parseLong(id));
+                System.out.println(user);
+                
+                listRole = roleFacade.findAll();
+                request.setAttribute("listRole", listRole);
+                request.setAttribute("user", user);
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("editUserForm")).forward(request, response);
                 break;
                 
             case "/editUser":
-                String id = request.getParameter("customer");
+                id = request.getParameter("userID");
                 name = request.getParameter("name");
                 String surname = request.getParameter("surname");
+                String roleID = request.getParameter("role");
                 String phone = request.getParameter("phone");
                 String email = request.getParameter("email");
+                String money = request.getParameter("money");
                 
                 user = userFacade.find(Long.parseLong(id));
                 user.setName(name);
                 user.setSurname(surname);
+                user.setRoleID(roleFacade.find(Long.parseLong(roleID)).getId());
                 user.setPhone(phone);
                 user.setEmail(email);
+                user.setMoney(Double.parseDouble(money));
                 userFacade.edit(user);
 
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);

@@ -13,22 +13,36 @@
         <title>Список покупателей</title>
     </head>
     <body>
-        <h1>Список покупателей</h1>
-        <table border="1">
+        <h1>Список пользователей</h1>
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>Имя</td>
-                    <td>Фамилия</td>
-                    <td>Телефон</td>
-                    <td>Почта</td>
+                    <th scope="col">#</th>
+                    <th scope="col">Логин</th>
+                    <th scope="col">Имя Фамилия</th>
+                    <th scope="col">Роль</th>
+                    <th scope="col">Телефон</th>
+                    <th scope="col">Эмаил</th>
+                    <th scope="col">Счёт</th>
+                    <th scope="col"></th>
                 </tr>
-            <c:forEach var="user" items="${listUser}">
-                <tr>
-                    <td>${user.name}</td>
-                    <td>${user.surname}</td>
-                    <td>${user.phone}</td>
-                    <td>${user.email}</td>
-                </tr>
-            </c:forEach>
+            </thead>
+            <tbody>
+                <c:forEach var="user" items="${listUser}">
+                    <form action="editUserForm" method="POST">
+                        <tr class="align-middle">
+                            <th scope="row">${user.id} <input name="userID" value="${user.id}" style="display: none"> </th>
+                            <td>${user.login}</td>
+                            <td>${user.name} ${user.surname}</td>
+                            <td>${listRole[user.roleID - 1].type}</td>
+                            <td>${user.phone}</td>
+                            <td>${user.email}</td>
+                            <td>${user.money}</td>
+                            <td><input type="submit" name="submit" value="Изменить" class="btn btn-dark"></td>
+                        </tr>
+                    </form>
+                </c:forEach>
+            </tbody>
         </table>
         
         <a href="index">Назад</a>

@@ -5,6 +5,7 @@
  */
 package entity;
 
+import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,14 +25,14 @@ public class Item {
     private double price;
     private int quantity;
     private long itemTypeID;
+    private ArrayList<String> conf;
 
     public Item() {
     }
 
-    public Item(String name, double price, long itemTypeID, int quantity) {
+    public Item(String name, double price, int quantity) {
         this.name = name;
         this.price = price;
-        this.itemTypeID = itemTypeID;
         this.quantity = quantity;
     }
 
@@ -74,12 +75,23 @@ public class Item {
     public void setItemType(long itemTypeID) {
         this.itemTypeID = itemTypeID;
     }
-    
-    
+
+    public ArrayList<String> getConf() {
+        return conf;
+    }
+
+    public void setConf(ArrayList<String> conf) {
+        this.conf = conf;
+    }
+
     @Override
     public String toString() {
-        return "Item{" + "id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity + '}';
+        return "Item{" + "id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity + ", itemTypeID=" + itemTypeID + ", conf=" + conf + '}';
     }
+    
+    
+    
+    
 
     
     

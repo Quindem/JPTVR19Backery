@@ -17,6 +17,7 @@
     <br>
     <a href="register">Регистрация</a><br>
     <a href="loginForm">Вход</a><br>
+    <a href="logout">Выход</a><br>
     <br>
     <a href="addItemTypeForm">Добавить тип предмета</a><br>
     <a href="listUser">Список пользователей</a><br>

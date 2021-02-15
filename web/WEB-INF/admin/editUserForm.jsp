@@ -9,58 +9,46 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Список покупателей</title>
+        <title>Изменение пользователя</title>
     </head>
-    <body>
-        <h1>Список покупателей</h1>
+    <body onload="funonload();" class="d-flex align-items-center">
         <form action="editUser" method="POST">
-            <select id="customerChoice" name="customer">
-                <option value="">Выберите покупателя</option>
-                <c:forEach var="customer" items="${listUser}">
-                    <option value="${customer.id}" id="${customer.id}">${customer.name} ${customer.surname} ${customer.phone} ${customer.email}</option>
-                </c:forEach>
-            </select>
-            
-            <div class="row">
-                <div class="block"><span>Имя пользователя</span></div>
-                <div class="block"><input type="text" name="name" id="name" placeholder="Введите имя"></div>
+            <input type="text" value="${user.id}" name="userID" style="display: none">
+            <div class="col-md-4 offset-md-4">
+                <h3 class="mb-3">Изменение пользователя ${user.login}</h3>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Имя и Фамилия</span>
+                    <input name="name" value="${user.name}" type="text" aria-label="First name" class="form-control">
+                    <input name="surname" value="${user.surname}" type="text" aria-label="Last name" class="form-control">
+                </div>
+                <div class="input-group mb-3">
+                    <select name="role" id="roleSelect" class="form-select" id="inputGroupSelect01">
+                        <c:forEach var="role" items="${listRole}">
+                            <option value="${role.id}">${role.type}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Телефон</span>
+                    <input name="phone" value="${user.phone}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Эмаил</span>
+                    <input name="email" value="${user.email}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+
+                <div class="input-group">
+                    <input name="money" value=${user.money} type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                    <span class="input-group-text">€</span>
+                </div>
+                    
+                <input type="submit" name="submit" value="Изменить" class="btn btn-primary mt-3 w-100">
             </div>
-            <div class="row">
-                <div class="block"><span>Фамилия пользователя</span></div>
-                <div class="block"><input type="text" name="surname" id="surname" placeholder="Введите фамилию"></div>
-            </div>
-            <div class="row">
-                <div class="block"><span>Номер телефона</span></div>
-                <div class="block"><input type="text" name="phone" id="phone" placeholder="Введите телефон"></div>
-            </div>
-            <div class="row">
-                <div class="block"><span>Электронная почта</span></div>
-                <div class="block"><input type="text" name="email" id="email" placeholder="Введите почту"></div>
-            </div>
-            <input type="submit" name="submit" value="Изменить">
         </form>
     </body>
     
     <script>
-        customerChoice = document.getElementById("customerChoice");
-        listCustomer = '${listCustomer}';
-        
-        nameInput = document.getElementById("name");
-        surnameInput = document.getElementById("surname");
-        phoneInput = document.getElementById("phone");
-        emailInput = document.getElementById("email");
-        
-        customerChoice.addEventListener("change", () => {
-           option = document.getElementById(customerChoice.value);
-           obj = option.innerHTML.split(" ");
-           
-           console.log(obj[0]);
-           
-           nameInput.value = obj[0];
-           surnameInput.value = obj[1];
-           phoneInput.value = obj[2];
-           emailInput.value = obj[3];
-        });
-       
+        function funonload() {
+            select = document.getElementById("roleSelect")
+            select.value = '${user.roleID}';
+        }
     </script>
 </html>

@@ -40,7 +40,7 @@ public class UserFacade extends AbstractFacade<User>{
     }
     
     public boolean isRole(long roleID, User user) {
-        if (user.getRoleID() == roleID)
+        if (user.getRoleID() <= roleID)
             return true;
         return false;
     }

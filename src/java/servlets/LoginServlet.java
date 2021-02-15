@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import entity.Item;
 import entity.User;
 import entity.Role;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import session.ItemFacade;
 import session.UserFacade;
 import session.RoleFacade;
 
@@ -29,7 +31,9 @@ import session.RoleFacade;
     "/register",
     "/createUser",
     "/loginForm",
-    "/login"
+    "/login",
+    "/logout",
+    "/listItem"
 })
 public class LoginServlet extends HttpServlet {
     @EJB
@@ -38,6 +42,8 @@ public class LoginServlet extends HttpServlet {
     private RoleFacade roleFacade;
     @EJB
     private UserFacade userFacade;
+    @EJB
+    private ItemFacade itemFacade;
 
     public static final ResourceBundle pathToFile = ResourceBundle.getBundle("property.pathToFile");
         
@@ -94,6 +100,9 @@ public class LoginServlet extends HttpServlet {
                 user.setPassword(password);
                 System.out.println(user.toString());
                 userFacade.create(user);
+                HttpSession session = request.getSession(true);
+                session.setAttribute("user", user);
+                request.setAttribute("info","Вы вошли как "+ user.getLogin());
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);
                 break;
             case "/loginForm":
@@ -116,13 +125,19 @@ public class LoginServlet extends HttpServlet {
                     request.getRequestDispatcher("/loginForm").forward(request, response);
                     break;
                 }
-                HttpSession session = request.getSession(true);
+                session = request.getSession(true);
                 session.setAttribute("user", user);
                 request.setAttribute("info","Вы вошли как "+ user.getLogin());
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);
                 break;
                 
-                /*
+            case "/listItem":
+                List<Item> listItem = itemFacade.findAll();
+                request.setAttribute("listItem", listItem);
+                request.getRequestDispatcher(LoginServlet.pathToFile.getString("listItem")).forward(request, response);
+                break;
+                
+                
             case "/logout":
                 session = request.getSession(false);
                 if(session != null){
@@ -131,6 +146,8 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("info", "Вы вышли");
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);
                 break;
+                
+                /*
             case "/registrationForm":
                 request.setAttribute("activeRegistration", "true");
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("registration")).forward(request, response);

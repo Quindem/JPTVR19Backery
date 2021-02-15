@@ -90,7 +90,7 @@ public class MyServlet extends HttpServlet {
                 String value = request.getParameter("itemId");;
                 itemType = itemTypeFacade.find(Long.parseLong(value)); 
                 
-                Item item = new Item(name, price, itemType.getId() ,quantity);
+                Item item = new Item(name, price, quantity);
                 System.out.println(item.toString());
                 itemFacade.create(item);
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
