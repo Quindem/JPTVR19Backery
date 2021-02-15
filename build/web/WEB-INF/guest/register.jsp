@@ -7,34 +7,31 @@
         <title>Добавление покупател</title>
     </head>
     <body>
-        <h1>Добавление покупателя!</h1>
-        
         <form action="createUser" method="POST">
-            <div class="row">
-                <div class="block"><span>Логин</span></div>
-                <div class="block"><input type="text" name="login" placeholder="Введите имя"></div>
+            <div class="col-md-4 mt-5 offset-md-4">
+                <h3 class="mb-3">Регистрация</h3>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Логин</span>
+                    <input name="login" type="text" aria-label="Логин" class="form-control">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Пароль</span>
+                    <input name="password" type="password" aria-label="Пароль" class="form-control">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Имя и Фамилия</span>
+                    <input name="name" type="text" aria-label="First name" class="form-control">
+                    <input name="surname" type="text" aria-label="Last name" class="form-control">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Телефон</span>
+                    <input name="phone" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Эмаил</span>
+                    <input name="email" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+          
+                <input type="submit" name="submit" value="Регистрация" class="btn btn-outline-dark w-100">
             </div>
-            <div class="row">
-                <div class="block"><span>Пароль</span></div>
-                <div class="block"><input type="password" name="password" placeholder="Введите фамилию"></div>
-            </div>
-            <div class="row">
-                <div class="block"><span>Имя пользователя</span></div>
-                <div class="block"><input type="text" name="name" placeholder="Введите имя"></div>
-            </div>
-            <div class="row">
-                <div class="block"><span>Фамилия пользователя</span></div>
-                <div class="block"><input type="text" name="surname" placeholder="Введите фамилию"></div>
-            </div>
-            <div class="row">
-                <div class="block"><span>Номер телефона</span></div>
-                <div class="block"><input type="text" name="phone" placeholder="Введите телефон"></div>
-            </div>
-            <div class="row">
-                <div class="block"><span>Электронная почта</span></div>
-                <div class="block"><input type="text" name="email" placeholder="Введите почту"></div>
-            </div>
-            <input type="submit" name="submit" value="Добавить">
         </form>
     </body>
 </html>

@@ -73,9 +73,13 @@ public class CustomerServlet extends HttpServlet {
             request.getRequestDispatcher("/loginForm").forward(request, response);
             return;
         }
+        user = userFacade.find(user.getId());
         boolean isRole = userFacade.isRole(3, user);
         if(!isRole){
             request.setAttribute("info", user);
+            
+            user = userFacade.find(user.getId());
+            request.setAttribute("user", user);
             request.getRequestDispatcher("/loginForm").forward(request, response);
             return;
         }
@@ -83,49 +87,77 @@ public class CustomerServlet extends HttpServlet {
         switch (path) {
             
             case "/addMoneyForm":
-                List<User> listUser = userFacade.findAll();
-                request.setAttribute("listCustomer", listUser);
+                user = (User) session.getAttribute("user");
+                user = userFacade.find(user.getId());
+                
+                request.setAttribute("user", user);
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("addMoneyForm")).forward(request, response);
                 break;
-            case "/customerChoice":
-                String value = request.getParameter("customerID");
-                user = userFacade.find(Long.parseLong(value));
-                listUser = userFacade.findAll();
-                request.setAttribute("listCustomer", listUser);
-                request.setAttribute("customer", user);
-                request.getRequestDispatcher(LoginServlet.pathToFile.getString("addMoneyForm")).forward(request, response);
             case "/addMoney":
-                String id = request.getParameter("customerID");
+                String userID = request.getParameter("userID");
                 Double money = Double.parseDouble(request.getParameter("money"));
-                user = userFacade.find(Long.parseLong(id));
+                user = userFacade.find(Long.parseLong(userID));
                 
                 user.setMoney(user.getMoney() + money);
                 userFacade.edit(user);
                 
+                user = userFacade.find(user.getId());
+                request.setAttribute("user", user);
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);
-            case "/buyItemForm":
-                listUser = userFacade.findAll();
-                List<Item> listItem = itemFacade.findAll();
-                request.setAttribute("listCustomer", listUser);
-                request.setAttribute("listItem", listItem);
+            case "/buyItemForm":  
+                String itemID = request.getParameter("itemID");
+                Item item = itemFacade.find(Long.parseLong(itemID));
+                
+                String optionName = "option" + item.getId();
+                String conf = request.getParameter(optionName);
+
+                int confIndex = item.getConf().indexOf(conf);
+                
+                user = (User) session.getAttribute("user");
+                
+                request.setAttribute("user", user);
+                request.setAttribute("item", item);
+                request.setAttribute("conf", conf);
+                request.setAttribute("confIndex", confIndex);
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("buyItemForm")).forward(request, response);
                 break;
             case "/buyItem":
-                String customerID = request.getParameter("customerID");
-                String itemID = request.getParameter("itemID");
-                user = userFacade.find(Long.parseLong(customerID));
-                Item item = itemFacade.find(Long.parseLong(itemID));
-                if (user.getMoney() - item.getPrice() > 0 && item.getQuantity() > 0){
-                    item.setQuantity(item.getQuantity() - 1);
-                    user.setMoney(user.getMoney() - item.getPrice());
-                    userFacade.edit(user);
-                    itemFacade.edit(item);
-                    request.setAttribute("info", "Куплент товар: " + item.toString());
-                    request.getRequestDispatcher("/index.jsp").forward(request, response);
-                } else {
-                    request.setAttribute("info", "Недостаточно денег");
+                itemID = request.getParameter("itemID");
+                confIndex = Integer.parseInt(request.getParameter("confIndex"));
+                user = (User) session.getAttribute("user");
+                user = userFacade.find(user.getId());
+                
+                item = itemFacade.find(Long.parseLong(itemID));
+                
+                if(user.getMoney() - item.getPrice() < 0){
+                    System.out.println(user.getMoney() - item.getPrice());
+                    request.setAttribute("info", "Недостаточно средств на счёте");
+                    
+                    user = userFacade.find(user.getId());
+                    request.setAttribute("user", user);
                     request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);
+                    break;
                 }
+                if(item.getQuantity() <= 0){
+                    request.setAttribute("info", "Данного предмета нет в наличии");
+                    
+                    user = userFacade.find(user.getId());
+                    request.setAttribute("user", user);
+                    request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);
+                    break;
+                }
+                
+                user.setMoney(user.getMoney() - item.getPrice());
+                item.setQuantity(item.getQuantity()-1);
+                
+                userFacade.edit(user);
+                itemFacade.edit(item);
+                
+                request.setAttribute("info", "Товар " + item.getName() + " был куплен");
+                
+                user = userFacade.find(user.getId());
+                request.setAttribute("user", user);
+                request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);
                 break;
         }
     }

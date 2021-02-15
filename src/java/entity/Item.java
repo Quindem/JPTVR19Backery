@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -26,7 +27,9 @@ public class Item {
     private int quantity;
     private long itemTypeID;
     private ArrayList<String> conf;
-
+    @OneToOne
+    private Cover cover;
+    
     public Item() {
     }
 
@@ -84,10 +87,19 @@ public class Item {
         this.conf = conf;
     }
 
+    public Cover getCover() {
+        return cover;
+    }
+
+    public void setCover(Cover cover) {
+        this.cover = cover;
+    }
+
     @Override
     public String toString() {
-        return "Item{" + "id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity + ", itemTypeID=" + itemTypeID + ", conf=" + conf + '}';
+        return "Item{" + "id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity + ", itemTypeID=" + itemTypeID + ", conf=" + conf + ", cover=" + cover + '}';
     }
+
     
     
     

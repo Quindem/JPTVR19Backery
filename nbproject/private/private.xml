@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Alebro/Documents/NetBeansProjects/JPTVR19ClothesShop/src/java/entity/ItemType.java</file>
-            <file>file:/C:/Users/Alebro/Documents/NetBeansProjects/JPTVR19ClothesShop/src/java/entity/Item.java</file>
-            <file>file:/C:/Users/Alebro/Documents/NetBeansProjects/JPTVR19ClothesShop/web/WEB-INF/manager/addItemForm.jsp</file>
+            <file>file:/C:/Users/Alebro/Documents/NetBeansProjects/JPTVR19ClothesShop/web/WEB-INF/manager/editItemList.jsp</file>
             <file>file:/C:/Users/Alebro/Documents/NetBeansProjects/JPTVR19ClothesShop/src/java/servlets/ManagerServlet.java</file>
-            <file>file:/C:/Users/Alebro/Documents/NetBeansProjects/JPTVR19ClothesShop/src/java/servlets/LoginServlet.java</file>
-            <file>file:/C:/Users/Alebro/Documents/NetBeansProjects/JPTVR19ClothesShop/web/WEB-INF/guest/listItem.jsp</file>
+            <file>file:/C:/Users/Alebro/Documents/NetBeansProjects/JPTVR19ClothesShop/src/java/property/pathToFile.properties</file>
         </group>
     </open-files>
 </project-private>

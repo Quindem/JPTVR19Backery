@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
     public void init() throws ServletException {
         
        if(customerFacade.findAll().size()>0) return;
-        User user = new User("admin", "12345", "Juri", "Melnikov", "56569987", "vsevolod.boltv@ivkhk.ee", 99999, 1);
+        User user = new User("admin", "admin", "Админ", "Админович", "5555555555", "clothesshop@gmail.com", 10000, 1);
         customerFacade.create(user);
         Role role = new Role("ADMIN");
         roleFacade.create(role);
@@ -125,14 +125,28 @@ public class LoginServlet extends HttpServlet {
                     request.getRequestDispatcher("/loginForm").forward(request, response);
                     break;
                 }
-                session = request.getSession(true);
-                session.setAttribute("user", user);
-                request.setAttribute("info","Вы вошли как "+ user.getLogin());
-                request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);
+                if(user.getPassword().equals(password)){
+                    session = request.getSession(true);
+                    session.setAttribute("user", user);
+                    request.setAttribute("info","Вы вошли как "+ user.getLogin());
+                    request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);   
+                } else {
+                    request.setAttribute("info","Неверный пароль!");
+                    request.getRequestDispatcher("/loginForm").forward(request, response);
+                    break;
+                }
+                
                 break;
                 
             case "/listItem":
                 List<Item> listItem = itemFacade.findAll();
+                /**
+                for(Item item : listItem){
+                    if(item.getQuantity() <= 0){
+                        listItem.remove(listItem.indexOf(item));
+                    }
+                }
+                * */
                 request.setAttribute("listItem", listItem);
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("listItem")).forward(request, response);
                 break;

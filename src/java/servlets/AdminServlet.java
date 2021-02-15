@@ -70,6 +70,7 @@ public class AdminServlet extends HttpServlet {
             request.getRequestDispatcher("/loginForm").forward(request, response);
             return;
         }
+        user = userFacade.find(user.getId());
         boolean isRole = userFacade.isRole(1, user);
         if(!isRole){
             request.setAttribute("info", user);
@@ -97,6 +98,9 @@ public class AdminServlet extends HttpServlet {
                 ItemType itemType = new ItemType(name);
                 System.out.println(itemType.toString());
                 itemTypeFacade.create(itemType);
+                
+                user = userFacade.find(user.getId());
+                request.setAttribute("user", user);
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);
                 break;
                 
@@ -129,7 +133,9 @@ public class AdminServlet extends HttpServlet {
                 user.setEmail(email);
                 user.setMoney(Double.parseDouble(money));
                 userFacade.edit(user);
-
+                
+                user = userFacade.find(user.getId());
+                request.setAttribute("user", user);
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);
                 break;
                 

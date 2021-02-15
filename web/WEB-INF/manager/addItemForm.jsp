@@ -9,11 +9,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" ">
         <title>Добавление предмета</title>
     </head>
-    <body>
-        <form action="createItem" method="POST" class="col-md-4 offset-md-4">
+    <body> 
+        <form action="createItem" method="POST" enctype="multipart/form-data" class="col-md-4 offset-md-4">
             <h3>Добавить предмет</h3>
             <div class="input-group mb-3 mt-3">
                 <input name="name" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="Название">
@@ -45,9 +45,9 @@
                 <input id="conf2" name="conf2" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="Конфигурации">
             </div>
             <div class="input-group mb-2" id="confDiv">
-                <input id="conf3" name="conf3" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="Конфигурации">
+                <input id="conf3" name="nf3" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="Конфигурации">
             </div>
-            <div class="input-group mb-2" id="confDiv">
+            <div class="input-group mb-2" id="ccoonfDiv">
                 <input id="conf4" name="conf4" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="Конфигурации">
             </div>
             <div class="input-group mb-2" id="confDiv">

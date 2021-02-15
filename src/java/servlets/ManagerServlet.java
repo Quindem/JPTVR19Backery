@@ -17,12 +17,11 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -42,10 +41,10 @@ import session.UserFacade;
 @WebServlet(name = "ManagerServlet", urlPatterns = {
     "/addItem",
     "/createItem",
-    "/editItemForm",
-    "/choiceItem",
+    "/editItemList",
     "/editItem"
 })  
+@MultipartConfig
 public class ManagerServlet extends HttpServlet {
     @EJB
     private RoleFacade roleFacade;
@@ -67,6 +66,7 @@ public class ManagerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -84,6 +84,7 @@ public class ManagerServlet extends HttpServlet {
             request.getRequestDispatcher("/loginForm").forward(request, response);
             return;
         }
+        user = userFacade.find(user.getId());
         boolean isRole = userFacade.isRole(2, user);
         if(!isRole){
             request.setAttribute("info", user);
@@ -105,7 +106,7 @@ public class ManagerServlet extends HttpServlet {
                 double price = Double.parseDouble(request.getParameter("price"));
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
                 
-                String uploadFolder = "С:\\UploadJPTVR19Clothes";
+                String uploadFolder = "\\UploadJPTVR19Clothes";
                 List<Part> fileParts = request
                         .getParts()
                         .stream()
@@ -142,25 +143,25 @@ public class ManagerServlet extends HttpServlet {
                 
                 Item item = new Item(name, price, quantity);
                 item.setConf(confList);
+                item.setCover(cover);
                 System.out.println(item.toString());
                 itemFacade.create(item);
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);
                 break;
                 
-            case "/editItemForm":
+            case "/editItemList":
                 List<Item> listItem = itemFacade.findAll();
                 request.setAttribute("listItem", listItem);
-                request.getRequestDispatcher(LoginServlet.pathToFile.getString("editItemForm")).forward(request, response);
+                request.getRequestDispatcher(LoginServlet.pathToFile.getString("editItemList")).forward(request, response);
                 break;
+                /**
+            case "/editItemForm":
+                String itemID = request.getParameter("itemID");
+                item = itemFacade.find(Long.parseLong(itemID));
                 
-            case "/choiceItem":
-                value = request.getParameter("itemId");
-                item = itemFacade.find(Long.parseLong(value));     
-                listItem = itemFacade.findAll();
-                request.setAttribute("listItem", listItem);    
-                request.setAttribute("item", item);
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("editItemForm")).forward(request, response);
                 break;
+                * */
             case "/editItem":
                 String id = request.getParameter("itemID");
                 name = request.getParameter("name");

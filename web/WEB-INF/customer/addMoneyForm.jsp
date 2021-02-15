@@ -11,38 +11,26 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Добавление денег</title>
     </head>
-    <body>
-        <h1>Добавление денег</h1>
-        
-        <form action="customerChoice" method="POST">
-            <select id="customerChoice" name="customerID">
-                <option value="">Выберите покупателя</option>
-                <c:forEach var="customer" items="${listCustomer}">
-                    <option value="${customer.id}" id="${customer.id}">${customer.name} ${customer.surname} ${customer.phone} ${customer.email}</option>
-                </c:forEach>
-            </select>
-                <input type="submit" value="Выбрать">
-        </form>
-                
-        <form action="addMoney" method="POST" id="addMoney">
-            <span>В данный момент денег: ${customer.money} евро</span><br>
-            <input type="number" name="money" id="name" placeholder="Введите сколько добавить">
-            <input type="submit" value="Добавить">
-            <input name="customerID" style="display: none" value="${customer.id}">
-        </form>
+    <body>     
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-4 offset-md-4">
+                    <form action="addMoney" method="POST" id="addMoney">
+                        <input class="d-none" value="${user.id}" name="userID" type="text">
+                        <p class="fs-4">Полполение счёта</p>
+                        <p class="fs-5">На счету имеется ${user.money}€</p>
+                        <div class="input-group mb-2">
+                            <input name="money" type="text" class="form-control" aria-label="">
+                            <span class="input-group-text">€</span>
+                        </div>
+                        <button type="subbmit" class="btn btn-outline-secondary w-100">Пополнить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
     
     <script>
-        addMoney = document.getElementById("addMoney");
-        customer = '${customer}';
-        
-        if (customer === ""){
-            addMoney.style.display = "none";
-        } else {
-            addMoney.style.display = "block";
-            customerChoice = document.getElementById("customerChoice");
-            customerChoice.value = '${customer.id}';
-        }
         
     </script>
 </html>

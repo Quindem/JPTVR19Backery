@@ -12,24 +12,24 @@
         <title>Покупка товара</title>
     </head>
     <body>
-        <h1>Покупка товара</h1>
-        <form action="buyItem" method="POST">
-            <span>Выберите покупателя</span><br>
-            <select id="customerChoice" name="customerID">
-                <option value="">Выберите покупателя</option>
-                <c:forEach var="customer" items="${listCustomer}">
-                    <option value="${customer.id}" id="${customer.id}">${customer.name} ${customer.surname} ${customer.phone} ${customer.email}</option>
-                </c:forEach>
-            </select>
-                <br>
-            <span>Выберите товар</span><br>
-            <select id="itemChoice" name="itemID">
-                <option value="">Выберите товар</option>
-                <c:forEach var="item" items="${listItem}">
-                    <option value="${item.id}" id="${item.id}">${item.name} ${item.price} евро ${item.quantity} шт.</option>
-                </c:forEach>
-            </select>  
-            <input type="submit" value="Купить">
-        </form>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-7 offset-md-2">
+                    <form action="buyItem" method="POST" class="d-flex">
+                        <input type="text" class="d-none" name="itemID" value="${item.id}">
+                        <input type="text" class="d-none" name="confIndex" value="${confIndex}">
+                        <div class="w-50 me-3">
+                            <img src="insertCover/${item.cover.path}" class="card-img-top" alt="..." style="border-radius: none">
+                        </div>
+                        <div class="d-flex flex-column justify-content-start mt-1">
+                            <p class="fs-3 fw-bold">${item.name} (${conf})</p>
+                            <p class="fs-4">Цена: ${item.price}€</p>
+                            <p class="fs-4">Осталось на складе: ${item.quantity}</p>
+                            <button type="subbmit" class="btn btn-outline-dark">Подтвердить покупку</button>
+                        </div>        
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

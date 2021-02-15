@@ -7,19 +7,19 @@
         <title>Добавление покупател</title>
     </head>
     <body>
-        <h1>Добавление покупателя!</h1>
-        ${info}
         <form action="login" method="POST">
-            <div class="row">
-                <div class="block"><span>Логин</span></div>
-                <div class="block"><input type="text" name="login" placeholder="Введите имя"></div>
+            <div class="col-md-4 offset-md-4">
+                <h3 class="mb-3 mt-5">Вход</h3>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Логин</span>
+                    <input name="login" type="text" aria-label="Логин" class="form-control">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Пароль</span>
+                    <input name="password" type="password" aria-label="Пароль" class="form-control">
+                </div>
+                <input type="submit" name="submit" value="Войти" class="btn btn-outline-dark w-100">
             </div>
-            <div class="row">
-                <div class="block"><span>Пароль</span></div>
-                <div class="block"><input type="password" name="password" placeholder="Введите фамилию"></div>
-            </div>
-            
-            <input type="submit" name="submit" value="Войти">
         </form>
     </body>
 </html>
