@@ -25,22 +25,32 @@
                     <th scope="col">Эмаил</th>
                     <th scope="col">Счёт</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach var="user" items="${listUser}">
-                    <form action="editUserForm" method="POST">
+                    
                         <tr class="align-middle">
-                            <th scope="row">${user.id} <input name="userID" value="${user.id}" style="display: none"> </th>
+                            <th scope="row">${user.id}</th>
                             <td>${user.login}</td>
                             <td>${user.name} ${user.surname}</td>
                             <td>${listRole[user.roleID - 1].type}</td>
                             <td>${user.phone}</td>
                             <td>${user.email}</td>
                             <td>${user.money}</td>
-                            <td><input type="submit" name="submit" value="Изменить" class="btn btn-dark"></td>
+                            <td>
+                                <form action="showUserHistory" method="POST">
+                                    <input name="userID" value="${user.id}" style="display: none">
+                                    <input type="submit" name="submit" value="Истоия покупок" class="btn btn-success"></td>
+                                </form>
+                            <td>
+                                <form action="editUserForm" method="POST">
+                                    <input name="userID" value="${user.id}" style="display: none">
+                                    <input type="submit" name="submit" value="Изменить" class="btn btn-dark">
+                                </form>
+                            </td>
                         </tr>
-                    </form>
                 </c:forEach>
             </tbody>
         </table>

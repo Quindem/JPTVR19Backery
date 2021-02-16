@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import entity.History;
 import entity.Item;
 import entity.ItemType;
 import entity.User;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import session.HistoryFacade;
 import session.ItemFacade;
 import session.ItemTypeFacade;
 import session.RoleFacade;
@@ -46,6 +48,8 @@ public class CustomerServlet extends HttpServlet {
     private ItemTypeFacade itemTypeFacade;
     @EJB
     private ItemFacade itemFacade;
+    @EJB
+    private HistoryFacade historyFacade;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -153,10 +157,13 @@ public class CustomerServlet extends HttpServlet {
                 userFacade.edit(user);
                 itemFacade.edit(item);
                 
+                History history = new History(user, item);
+                historyFacade.create(history);
+                
                 request.setAttribute("info", "Товар " + item.getName() + " был куплен");
                 
                 user = userFacade.find(user.getId());
-                request.setAttribute("user", user);
+                request.setAttribute("user", user);           
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);
                 break;
         }

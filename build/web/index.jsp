@@ -12,6 +12,8 @@
     <title>Магазин одежды</title>
   </head>
   <body>
+    ${user.money}
     
+    INDEX
   </body>
 </html>

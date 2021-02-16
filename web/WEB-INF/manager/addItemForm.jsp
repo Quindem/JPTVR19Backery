@@ -45,7 +45,7 @@
                 <input id="conf2" name="conf2" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="Конфигурации">
             </div>
             <div class="input-group mb-2" id="confDiv">
-                <input id="conf3" name="nf3" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="Конфигурации">
+                <input id="conf3" name="conf3" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="Конфигурации">
             </div>
             <div class="input-group mb-2" id="ccoonfDiv">
                 <input id="conf4" name="conf4" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="Конфигурации">

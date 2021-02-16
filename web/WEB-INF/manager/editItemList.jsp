@@ -20,6 +20,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Фотография</th>
                     <th scope="col">Название</th>
+                    <th scope="col">Конфигурация</th>
                     <th scope="col">Количество</th>
                     <th scope="col">Цена</th>
                     <th scope="col"></th>
@@ -31,6 +32,7 @@
                         <th scope="row">${item.id}</th>
                         <td> <img src="insertCover/${item.cover.path}" alt="..." class="w-25"></td>
                         <td>${item.name}</td>
+                        <td>${item.conf}</td>
                         <td>${item.quantity}</td>
                         <td>${item.price}€</td>
                         <td>

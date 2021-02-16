@@ -50,5 +50,10 @@
             select = document.getElementById("roleSelect")
             select.value = '${user.roleID}';
         }
+        
+        const userID = "${user.id}";
+        if (userID === "1"){
+            document.getElementById("roleSelect").disabled = true;
+        }
     </script>
 </html>

@@ -42,6 +42,7 @@ import session.UserFacade;
     "/addItem",
     "/createItem",
     "/editItemList",
+    "/editItemForm",
     "/editItem"
 })  
 @MultipartConfig
@@ -154,24 +155,38 @@ public class ManagerServlet extends HttpServlet {
                 request.setAttribute("listItem", listItem);
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("editItemList")).forward(request, response);
                 break;
-                /**
             case "/editItemForm":
                 String itemID = request.getParameter("itemID");
                 item = itemFacade.find(Long.parseLong(itemID));
                 
+                request.setAttribute("item", item);
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("editItemForm")).forward(request, response);
                 break;
-                * */
             case "/editItem":
-                String id = request.getParameter("itemID");
                 name = request.getParameter("name");
                 price = Double.parseDouble(request.getParameter("price"));
                 quantity = Integer.parseInt(request.getParameter("quantity"));
+                itemID = request.getParameter("itemID");
                 
-                item = itemFacade.find(Long.parseLong(id)); 
+                confList = new ArrayList<String>();
+                for (int i = 0; i < 8; i++){
+                    String confName = "conf" + (i+1);
+                    String conf = request.getParameter(confName);
+                    System.out.println(conf);
+                    if (conf != ""){
+                        confList.add(conf);
+                    }                
+                }
+                
+                confList.removeAll(Arrays.asList(null,""));
+                System.out.println(confList);
+                
+                System.out.println("itemID: " + itemID);
+                item = itemFacade.find(Long.parseLong(itemID)); 
                 item.setName(name);
                 item.setPrice(price);
                 item.setQuantity(quantity);
+                item.setConf(confList);
                 itemFacade.edit(item);
 
                 request.getRequestDispatcher(LoginServlet.pathToFile.getString("index")).forward(request, response);

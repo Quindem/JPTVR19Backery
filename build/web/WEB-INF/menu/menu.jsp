@@ -20,14 +20,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="addMoneyForm">Пополнить баланс</a
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="manager">
                 <a class="nav-link" href="editItemList">Управление товарами</a>
-            </li>
-            <li class="nav-item">
+            </li>         
+            <li class="nav-item" id="admin">
                 <a class="nav-link" href="listUser">Список пользователей</a>
-            </li>
+            </li>  
         </ul>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
                 <a class="nav-link" href="register">Регистрация</a>
             </li>
@@ -38,11 +38,28 @@
                 <a class="nav-link" href="logout">Выход</a>
             </li> 
         </ul>
-        
-        
+       
     </div>
   </div>
 </nav>
+
+    <script>
+        const manager = document.getElementById("manager");
+        const admin = document.getElementById("admin");
+        
+        manager.style = "display: none";
+        admin.style = "display: none";
+        
+        userRole = "${user.roleID}"; 
+        if (userRole != 0){
+            if(userRole < 3){
+                manager.style = "display: block";
+            }
+            if(userRole < 2){
+                admin.style = "display: block";
+            }
+        }
+    </script>
 
 <!--
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
