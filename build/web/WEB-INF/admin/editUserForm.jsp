@@ -31,7 +31,7 @@
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Телефон</span>
                     <input name="phone" value="${user.phone}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Эмаил</span>
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Почта</span>
                     <input name="email" value="${user.email}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                 </div>
 

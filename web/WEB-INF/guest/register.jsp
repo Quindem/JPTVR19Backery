@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Добавление покупател</title>
+        <title>Добавление покупателя</title>
     </head>
     <body>
         <form action="createUser" method="POST">
@@ -26,7 +26,7 @@
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Телефон</span>
                     <input name="phone" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Эмаил</span>
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Почта</span>
                     <input name="email" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                 </div>
           

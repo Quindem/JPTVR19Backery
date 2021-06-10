@@ -22,7 +22,7 @@
                     <th scope="col">Имя Фамилия</th>
                     <th scope="col">Роль</th>
                     <th scope="col">Телефон</th>
-                    <th scope="col">Эмаил</th>
+                    <th scope="col">Почта</th>
                     <th scope="col">Счёт</th>
                     <th scope="col"></th>
                     <th scope="col"></th>

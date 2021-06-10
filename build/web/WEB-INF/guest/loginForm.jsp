@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Добавление покупател</title>
+        <title>Добавление покупателя</title>
     </head>
     <body>
         <form action="login" method="POST">

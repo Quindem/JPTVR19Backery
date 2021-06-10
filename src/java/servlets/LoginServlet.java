@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
     public void init() throws ServletException {
         
        if(customerFacade.findAll().size()>0) return;
-        User user = new User("admin", "admin", "Админ", "Админович", "5555555555", "clothesshop@gmail.com", 10000, 1);
+        User user = new User("admin", "admin", "Админ", "админ", "5553535", "Bakeryshop@gmail.com", 10000, 1);
         customerFacade.create(user);
         Role role = new Role("ADMIN");
         roleFacade.create(role);

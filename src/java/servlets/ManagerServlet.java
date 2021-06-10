@@ -107,7 +107,7 @@ public class ManagerServlet extends HttpServlet {
                 double price = Double.parseDouble(request.getParameter("price"));
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
                 
-                String uploadFolder = "\\UploadJPTVR19Clothes";
+                String uploadFolder = "\\UploadJPTVR19WebBakery";
                 List<Part> fileParts = request
                         .getParts()
                         .stream()
